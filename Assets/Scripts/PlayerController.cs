@@ -27,10 +27,13 @@ public class PlayerController : MonoBehaviour
     {
         if (health == 0)
         {
-            Debug.Log("Game Over!");
+            winLoseText.text = "Game Over!";
+            winLoseText.color = Color.white;
+            winLoseBG.color = Color.red;
+            winLoseBG.gameObject.SetActive(true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene  to restart the game if there's no more health left.
             score = 0;
-            health  = 5;
+            health = 5;
         }
     }
 
