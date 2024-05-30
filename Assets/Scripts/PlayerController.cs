@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private int score =  0;   // Set the initial value of score to 0.
     public int health = 5;
     public Text scoreText;
+    public Text healthText;
 
 
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         SetScoreText();
+        SetHealthText();
     }
 
     // Update is called once per frame
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Trap"))
         {
             health--;
+            SetHealthText();
             Debug.Log("Health: "  + health);
         }
 
@@ -71,5 +74,11 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString(); // Update the score text with the current score
+    }
+
+    // Method to update the  health text UI element
+    void  SetHealthText()
+    {
+        healthText.text = "Health: " + health.ToString();
     }
 }
