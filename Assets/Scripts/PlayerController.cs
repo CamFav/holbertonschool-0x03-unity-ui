@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,12 +8,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int score =  0;   // Set the initial value of score to 0.
     public int health = 5;
+    public Text scoreText;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        SetScoreText();
     }
 
     // Update is called once per frame
@@ -49,16 +50,14 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Pickup")) // Check if player collides with a object tagged Pickup (coin)
         {
             score++;
-
+            SetScoreText();
             Debug.Log("Score: " + score);
-
             other.gameObject.SetActive(false); // Disable the coin (Destroy(other.gameObject) to destroy it)
         }
 
         if (other.CompareTag("Trap"))
         {
             health--;
-
             Debug.Log("Health: "  + health);
         }
 
@@ -66,5 +65,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("You win!");
         }
+    }
+
+    // Method to update the score text UI element
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString(); // Update the score text with the current score
     }
 }
